@@ -1,0 +1,19 @@
+subprojects {
+    dependencies {
+        compile(
+                'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client',
+//                'org.springframework.cloud:spring-cloud-starter-config',
+                'com.alibaba:fastjson:1.2.47',
+                'org.projectlombok:lombok:1.16.12',
+                'org.springframework.boot:spring-boot-starter-web'
+        )
+
+        testCompile(
+                'junit:junit:4.11'
+        )
+    }
+}
+
+
+// swagger 是否放在父类
+// shiro 是否放在父类

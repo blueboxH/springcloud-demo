@@ -1,0 +1,19 @@
+cas:
+  url:
+    prefix: https://cas.bluebox.org.cn:8443/cas
+    # prefix: https://dev.bluebox.org.cn:8443/cas
+    login: ${cas.url.prefix}/login
+    service: http://localhost:${server.port}
+    callback: ${cas.url.service}/callback
+  manager:
+    user: ushare
+    password: thgy168!^*
+  user:
+    local-country-code: 86
+    sms:
+      local-signature: '【Ulorder】'
+      signature: '[Ulorder]'
+
+
+logging:
+  config: classpath:log4j2.xml

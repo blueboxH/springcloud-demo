@@ -1,0 +1,13 @@
+rootProject.name = 'springcloud-demo'
+
+include 'microservice:sms-service'
+include 'microservice:hello-service'
+include 'microservice:hello-service:hello-service-api'
+include 'microservice:hello-service:hello-service-core'
+include 'microservice:consumer-demo'
+
+include 'eureka-server'
+include 'config-server'
+include 'api-gateway'
+include 'copy-demo'
+

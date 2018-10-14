@@ -1,0 +1,28 @@
+server:
+  port: 8771
+
+eureka:
+  instance:
+    ip-address: config.bluebox.org.cn
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.bluebox.org.cn:8761/eureka/
+
+spring:
+  application:
+    name: udev-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://192.168.14.240:3000/hetao/udevs.git
+          search-paths: udev-config-repo/{application}
+          username: huangbo
+          password: huangbo
+
+# todo: 用户名不设置可不可以, 分支功能的使用, 生产环境配置
+
+# 暂时不设置日志
+#logging:
+#  config: classpath:log4j2.xml

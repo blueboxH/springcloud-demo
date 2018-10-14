@@ -1,0 +1,98 @@
+buildscript {
+
+    ext {
+        springBootVersion = '2.0.5.RELEASE'
+        springCloudVersion = 'Finchley.SR1'
+    }
+
+    repositories {
+        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+subprojects {
+
+    buildscript {
+
+        ext {
+            springBootVersion = '2.0.5.RELEASE'
+        }
+
+        repositories {
+            maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+            mavenCentral()
+        }
+        dependencies {
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        }
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+//        maven {url 'http://192.168.12.60:8081/repository/maven-public/'}
+        mavenLocal()
+        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        mavenCentral()
+        jcenter()
+        maven {
+            url 'https://repo.spring.io/libs-milestone'
+        }
+    }
+
+
+    group = 'com.thgy'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = 1.8
+
+    ext {
+        springCloudVersion = 'Finchley.SR1'
+    }
+
+
+    configurations {
+        compile{
+            // 排除的依赖
+            // todo: 修改日志系统的时候放开这个注释
+            // Using log4j2 logging system
+//            exclude group: 'org.springframework.boot', module : 'spring-boot-starter-logging'
+            // Fixed Tomcat exception(No getVirtualHostName Method found)
+            exclude group:'javax.servlet', module: 'servlet-api'
+        }
+    }
+
+    // 子项目共有的依赖
+    dependencies {
+//        compile(
+//                'org.springframework.boot:spring-boot-starter-log4j2'
+//        )
+
+//        testCompile(
+//                'org.springframework.boot:spring-boot-starter-test',
+//                'junit:junit:4.11'
+//        )
+    }
+
+    // 编码
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+}
+

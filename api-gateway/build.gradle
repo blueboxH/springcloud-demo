@@ -1,0 +1,8 @@
+dependencies {
+    compile(
+//            'org.springframework.boot:spring-boot-starter',
+            'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client',
+            'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
+    )
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
