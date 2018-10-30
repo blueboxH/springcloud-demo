@@ -1,7 +1,6 @@
-//dependencies {
-//    compile(
-////            'org.springframework.boot:spring-boot-starter'
-//            'org.springframework.boot:spring-boot-starter-web'
-//    )
+dependencies {
+    compile(
+            'com.spring4all:swagger-spring-boot-starter:1.7.0.RELEASE'
+    )
 //    testCompile('org.springframework.boot:spring-boot-starter-test')
-//}
+}

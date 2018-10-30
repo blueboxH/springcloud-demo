@@ -42,7 +42,7 @@ public class AccessFilter extends ZuulFilter {
     @Override
     public boolean shouldFilter() {
 
-        return true;
+        return false;
     }
 
     // 过滤器的具体实现逻辑

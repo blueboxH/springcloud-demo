@@ -1,4 +1,4 @@
-package com.thgy.copyDemo;
+package com.thgy.forCopy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

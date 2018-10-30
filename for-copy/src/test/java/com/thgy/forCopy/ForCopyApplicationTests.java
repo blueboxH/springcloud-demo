@@ -1,4 +1,4 @@
-package com.thgy.copyDemo;
+package com.thgy.forCopy;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SmsServiceApplicationTests {
+public class ForCopyApplicationTests {
 
     @Test
     public void contextLoads() {

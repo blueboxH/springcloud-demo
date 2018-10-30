@@ -1,3 +1,6 @@
+server:
+  port: 5555
+
 eureka:
   client:
     service-url:
@@ -8,3 +11,16 @@ spring:
 
 zuul:
   prefix: /api  # 路由前缀
+
+
+swagger:
+  butler:
+    auto-generate-from-zuul-routes: true
+    # 不配置此参数时默认生成所有路由中的文档
+#    generate-routes: hello-service, feign-consumer
+    # 忽略的服务, 和 generate-routes 二选一
+    ignore-routes: config-server
+    # 自定义配置
+#    resources:
+#      hello-service:
+#        api-docs-path: v2/api-docs

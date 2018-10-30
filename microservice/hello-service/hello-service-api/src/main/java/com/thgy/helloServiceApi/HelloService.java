@@ -1,9 +1,13 @@
 package com.thgy.helloServiceApi;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+@Api(tags = "服务端测试demo")
 public interface HelloService {
 
+    @ApiOperation("hello test")
     @GetMapping("hello")
     String hello();
 
