@@ -9,7 +9,16 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enable-self-preservation: false  # 关闭自我保护机制
 
 #logging:
 #  config: classpath:log4j2.xml
+---
 
+spring:
+  profiles: prod
+
+eureka:
+  server:
+    enable-self-preservation: true

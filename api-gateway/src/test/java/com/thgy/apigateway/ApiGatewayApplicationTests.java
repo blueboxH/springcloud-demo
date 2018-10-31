@@ -1,4 +1,4 @@
-package com.thgy.forCopy;
+package com.thgy.apigateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

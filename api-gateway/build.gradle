@@ -3,7 +3,8 @@ dependencies {
 //            'org.springframework.boot:spring-boot-starter',
             'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client',
             'org.springframework.cloud:spring-cloud-starter-netflix-zuul',
-            'com.didispace:swagger-butler-core:1.2.0'
+            // zuul swagger
+            'com.didispace:swagger-butler-core:1.2.0'  
     )
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
