@@ -18,9 +18,9 @@ public class ConsumerController {
         user.setName("box2");
         user.setAge("23");
         StringBuilder sb = new StringBuilder();
-        sb.append(helloServiceFeign.hello()).append("\n");
+//        sb.append(helloServiceFeign.hello()).append("\n");
         sb.append(helloServiceFeign.hello("box")).append("\n");
-        sb.append(helloServiceFeign.hello("box", "24")).append("\n");
+        sb.append(helloServiceFeign.hello("box", 24)).append("\n");
         sb.append(helloServiceFeign.hello(user)).append("\n");
         return sb.toString();
     }
