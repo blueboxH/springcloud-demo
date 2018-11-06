@@ -25,7 +25,7 @@ public class ConsumerController {
 //            sb.append(helloServiceFeign.hello("box")).append("\n");
             sb.append(helloServiceFeign.hello("box", 0)).append("\n");
         } catch (Exception e){
-            System.out.print("#######");
+            System.out.println("#######");
             throw new ResultException(ResultEnum.SELECT_ERROR);
         }
         sb.append(helloServiceFeign.hello(user)).append("\n");

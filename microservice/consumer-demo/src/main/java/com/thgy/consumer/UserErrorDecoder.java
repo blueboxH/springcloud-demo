@@ -16,23 +16,30 @@ import java.io.IOException;
 public class UserErrorDecoder implements ErrorDecoder {
 
     public Exception decode(String methodKey, Response response) {
-        ObjectMapper om = new ObjectMapper();
-        JSON resEntity;
+//        ObjectMapper om = new ObjectMapper();
+        Object resEntity;
         Exception exception = null;
         try {
-            resEntity = om.readValue(Util.toString(response.body().asReader()), JSON.class);
-//为了说明我使用的 WebApplicationException 基类，去掉了封装
+            resEntity = JSON.parse(Util.toString(response.body().asReader()));
+//            resEntity = om.readValue(), JSON.class);
+        //为了说明我使用的 WebApplicationException 基类，去掉了封装
             exception = new WebApplicationException(javax.ws.rs.core.Response.status(response.status()).entity(resEntity).type(MediaType.APPLICATION_JSON).build());
         } catch (IOException ex) {
+            System.out.println("************************");
             System.out.println(ex.getMessage());
             System.out.println(ex);
+            System.out.println("************************");
+
         }
         // 这里只封装4开头的请求异常
         if (400 <= response.status() || response.status() < 500){
             exception = new HystrixBadRequestException("request exception wrapper", exception);
         }else{
+            System.out.println("************************");
             System.out.println(exception.getMessage());
             System.out.println(exception);
+            System.out.println("************************");
+
         }
         return exception;
     }
