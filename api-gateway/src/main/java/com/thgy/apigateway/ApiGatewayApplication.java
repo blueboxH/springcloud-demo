@@ -16,8 +16,8 @@ public class ApiGatewayApplication {
         SpringApplication.run(ApiGatewayApplication.class, args);
     }
 
-    @Bean
-    public DefaultErrorAttributes errorAttributes(){
-        return new MyErrorAttributes();
-    }
+//    @Bean
+//    public DefaultErrorAttributes errorAttributes(){
+//        return new MyErrorAttributes();
+//    }
 }
