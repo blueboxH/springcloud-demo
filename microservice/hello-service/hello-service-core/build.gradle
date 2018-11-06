@@ -3,5 +3,6 @@ dependencies {
 //            'com.thgy:hello-service-api:0.0.1-SNAPSHOT'
 //    )
     compile project(':microservice:hello-service:hello-service-api')
+    compile project(':common')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

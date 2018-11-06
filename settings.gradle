@@ -9,5 +9,5 @@ include 'microservice:consumer-demo'
 include 'eureka-server'
 include 'config-server'
 include 'api-gateway'
-//include 'copy-demo'
+include 'common'
 

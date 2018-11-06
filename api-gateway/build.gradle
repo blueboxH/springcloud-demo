@@ -6,5 +6,6 @@ dependencies {
             // zuul swagger
             'com.didispace:swagger-butler-core:1.2.0'  
     )
+    compile project(':common')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

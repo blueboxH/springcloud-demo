@@ -1,5 +1,7 @@
 package com.thgy.helloServiceCore;
 
+import com.thgy.common.result.ResultEnum;
+import com.thgy.common.result.ResultException;
 import com.thgy.helloServiceApi.HelloService;
 import com.thgy.helloServiceApi.User;
 import io.swagger.annotations.ApiParam;
@@ -19,12 +21,16 @@ public class HelloServiceContorller implements HelloService {
 
     @Override
     public String hello(@ApiParam("姓名") @RequestParam String name) {
+        Integer a = 1/ 0;
         return "hello " + name;
     }
 
     // 注意:　此处@RequestHeader不能省略
     @Override
     public User hello(@RequestHeader String name, @ApiParam(value = "年龄") @RequestHeader Integer age) {
+        if (age == 0){
+            throw new ResultException(ResultEnum.PARAMETER_ERROR, "年龄不对");
+        }
         User user = new User();
         user.setAge(age.toString());
         user.setName(name);

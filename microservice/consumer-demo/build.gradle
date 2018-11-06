@@ -4,5 +4,6 @@ dependencies {
             'org.springframework.cloud:spring-cloud-starter-openfeign'
     )
     compile project(':microservice:hello-service:hello-service-api')
+    compile project(':common')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

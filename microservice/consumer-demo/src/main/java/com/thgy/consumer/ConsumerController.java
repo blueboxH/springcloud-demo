@@ -1,5 +1,7 @@
 package com.thgy.consumer;
 
+import com.thgy.common.result.ResultEnum;
+import com.thgy.common.result.ResultException;
 import com.thgy.helloServiceApi.User;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,13 @@ public class ConsumerController {
         user.setAge("23");
         StringBuilder sb = new StringBuilder();
 //        sb.append(helloServiceFeign.hello()).append("\n");
-        sb.append(helloServiceFeign.hello("box")).append("\n");
-        sb.append(helloServiceFeign.hello("box", 24)).append("\n");
+        try {
+            sb.append(helloServiceFeign.hello("box")).append("\n");
+//            sb.append(helloServiceFeign.hello("box", 0)).append("\n");
+        } catch (Exception e){
+            System.out.print("#######");
+            throw new ResultException(ResultEnum.SELECT_ERROR);
+        }
         sb.append(helloServiceFeign.hello(user)).append("\n");
         return sb.toString();
     }

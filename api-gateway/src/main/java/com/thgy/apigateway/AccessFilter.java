@@ -17,7 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class AccessFilter extends ZuulFilter {
 
+    private RequestContext ctx;
+    private HttpServletRequest request;
+
     private static Logger log = LoggerFactory.getLogger(AccessFilter.class);
+    private static String NO_AUTH_API[] = {
+            "swagger",  // swagger
+            "/error",  // swagger
+            "/csrf"  // swagger
+    };
 
     // 过滤器的类型, 决定过滤器在请求的哪个生命周期中运行
     @Override
@@ -41,6 +49,24 @@ public class AccessFilter extends ZuulFilter {
     // 判断该过滤器是否需要被执行
     @Override
     public boolean shouldFilter() {
+        ctx = RequestContext.getCurrentContext();
+        request = ctx.getRequest();
+        String requestUrl = request.getRequestURL().toString();
+        log.info("send {} request to {}", request.getMethod(), requestUrl);
+
+        // swagger里面的不做验证, OPTIONS操作不做验证
+        if (requestUrl.equals("/") || request.getMethod().equals("OPTIONS")) return true;
+
+//        // 不用检查权限的api
+//        for (String api : NO_AUTH_API) {
+//            if (requestUrl.contains(api)){
+//                log.debug("请求 [{}] 跳过权限验证", requestUrl);
+//                return false;
+//            }
+//        }
+        if (requestUrl.endsWith("/v2/api-docs")){
+            return false;
+        }
 
         return false;
     }
@@ -48,11 +74,6 @@ public class AccessFilter extends ZuulFilter {
     // 过滤器的具体实现逻辑
     @Override
     public Object run() throws ZuulException {
-        RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest request = ctx.getRequest();
-
-        log.info("send {} request to {}", request.getMethod(), request.getRequestURL().toString());
-
         Object accessToken = request.getParameter("accessToken");
         if (accessToken == null){
             log.warn("access token is empty!");
