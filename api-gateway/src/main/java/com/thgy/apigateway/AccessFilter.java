@@ -3,11 +3,15 @@ package com.thgy.apigateway;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+import com.thgy.common.result.ResultEnum;
+import com.thgy.common.result.ResultException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE;
 
 
 /**
@@ -36,13 +40,14 @@ public class AccessFilter extends ZuulFilter {
         // - error: 在处理请求发生错误时调用
         // - post: 在routing 和 error 过滤器之后被调用
 
-        return "pre";
+        return PRE_TYPE;
     }
 
     // 过滤器的执行顺序, 当请求在一个阶段中存在多个过滤器时, 决定执行的顺序
     @Override
     public int filterOrder() {
         // 数字越小优先级越高
+//        throw new ResultException(ResultEnum.SELECT_ERROR);
         return 0;
     }
 
@@ -55,7 +60,7 @@ public class AccessFilter extends ZuulFilter {
         log.info("send {} request to {}", request.getMethod(), requestUrl);
 
         // swagger里面的不做验证, OPTIONS操作不做验证
-        if (requestUrl.equals("/") || request.getMethod().equals("OPTIONS")) return true;
+        if (requestUrl.equals("/") || request.getMethod().equals("OPTIONS")) return false;
 
 //        // 不用检查权限的api
 //        for (String api : NO_AUTH_API) {

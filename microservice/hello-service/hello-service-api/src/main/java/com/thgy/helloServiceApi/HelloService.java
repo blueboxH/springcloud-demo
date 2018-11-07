@@ -9,7 +9,7 @@ public interface HelloService {
 
     @ApiOperation("hello test")
     @GetMapping("hello")
-    String hello(MultipartFile image);
+    String hello();
 
     // 注意: @RequestParam("name") 中的"name" 并不能像在Controller中一样省略, 否则 Feign中会报错
     @GetMapping("hello1")
@@ -20,5 +20,5 @@ public interface HelloService {
     User hello(@RequestHeader("name") String name, @RequestHeader("age") Integer age);
 
     @PostMapping("hello3")
-    String hello(@RequestBody User user);
+    void hello(@RequestBody User user);
 }

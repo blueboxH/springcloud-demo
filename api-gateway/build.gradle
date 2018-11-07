@@ -4,7 +4,10 @@ dependencies {
             'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client',
             'org.springframework.cloud:spring-cloud-starter-netflix-zuul',
             // zuul swagger
-            'com.didispace:swagger-butler-core:1.2.0'  
+            'com.didispace:swagger-butler-core:1.2.0'  ,
+            'com.alibaba:fastjson:1.2.47',
+//            'org.apache.commons:commons-lang3',
+            'commons-beanutils:commons-beanutils:1.9.3'
     )
     compile project(':common')
     testCompile('org.springframework.boot:spring-boot-starter-test')

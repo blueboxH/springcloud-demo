@@ -23,6 +23,16 @@ public class ResultException extends RuntimeException {
         this.code = resultEnum.getCode();
     }
 
+    /**
+     * 为了方便直接实例化一个异常
+     * @param code
+     * @param message
+     */
+    public ResultException(String code, String message) {
+        super(message);
+        this.code = code;
+    }
+
     public String getCode() {
         return code;
     }

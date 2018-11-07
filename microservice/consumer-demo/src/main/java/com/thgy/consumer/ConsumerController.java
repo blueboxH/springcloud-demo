@@ -22,10 +22,15 @@ public class ConsumerController {
         StringBuilder sb = new StringBuilder();
 //        sb.append(helloServiceFeign.hello()).append("\n");
         try {
-//            sb.append(helloServiceFeign.hello("box")).append("\n");
+            sb.append(helloServiceFeign.hello("box")).append("\n");
+        } catch (Exception e){
+            System.out.print(e.getMessage());
+        }
+
+        try {
             sb.append(helloServiceFeign.hello("box", 0)).append("\n");
         } catch (Exception e){
-            System.out.println("#######");
+            System.out.println(e.getMessage());
             throw new ResultException(ResultEnum.SELECT_ERROR);
         }
         sb.append(helloServiceFeign.hello(user)).append("\n");

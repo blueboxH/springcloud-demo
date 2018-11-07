@@ -15,13 +15,15 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class HelloServiceContorller implements HelloService {
     @Override
-    public String hello(MultipartFile image) {
+    public String hello() {
         return "hello world!";
     }
 
     @Override
     public String hello(@ApiParam("姓名") @RequestParam String name) {
-        Integer a = 1/ 0;
+        if (name.equals("0")){
+            Integer a = 1/ 0;
+        }
         return "hello " + name;
     }
 
@@ -38,7 +40,6 @@ public class HelloServiceContorller implements HelloService {
     }
 
     @Override
-    public String hello(@RequestBody User user) {
-        return "hello " + user.getName() + ", " + user.getAge();
+    public void hello(@RequestBody User user) {
     }
 }

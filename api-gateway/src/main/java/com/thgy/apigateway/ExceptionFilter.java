@@ -2,13 +2,14 @@ package com.thgy.apigateway;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.exception.ZuulException;
+import com.thgy.common.result.ResultEnum;
+import com.thgy.common.result.ResultException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.ERROR_TYPE;
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.POST_TYPE;
 
 
 /**
@@ -23,37 +24,37 @@ public class ExceptionFilter extends ZuulFilter {
     // 过滤器的类型, 决定过滤器在请求的哪个生命周期中运行
     @Override
     public String filterType() {
-        // zuul 中默认定义了以下4中不同生命周期的锅炉其类型:
-        // - pre: 可以在请求被路由前调用
-        // - routing: 在路由请求时调用
-        // - error: 在处理请求发生错误时调用
-        // - post: 在routing 和 error 过滤器之后被调用
-
-        return "error";
+        return ERROR_TYPE;
+//        return POST_TYPE;
     }
 
     // 过滤器的执行顺序, 当请求在一个阶段中存在多个过滤器时, 决定执行的顺序
     @Override
     public int filterOrder() {
         // 数字越小优先级越高
-        return 10;
+        return 100;
     }
 
     // 判断该过滤器是否需要被执行
     @Override
     public boolean shouldFilter() {
 
-        return true;
+        return false;
     }
 
     // 过滤器的具体实现逻辑
     @Override
-    public Object run() throws ZuulException {
+    public Object run(){
         RequestContext ctx = RequestContext.getCurrentContext();
-        Throwable throwable = ctx.getThrowable();
-        log.error("this is a ErrorFilter : {}", throwable.getCause().getMessage());
-        ctx.set("error.status_code", HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        ctx.set("error.exception", throwable.getCause());
-        return null;
+        Throwable cause = ctx.getThrowable().getCause();
+
+        if (cause instanceof ResultException){
+            ctx.setResponseBody(ResultBody.error(((ResultException) cause).getCode(), cause.getMessage()).toJsonString());
+            return null;
+        } else {
+            cause.printStackTrace();
+            ctx.setResponseBody(ResultBody.error(ResultEnum.UNKNOW_ERROR).toJsonString());
+            return null;
+        }
     }
 }
