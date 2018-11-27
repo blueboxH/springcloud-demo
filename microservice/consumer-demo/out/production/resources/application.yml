@@ -16,7 +16,7 @@ swagger:
   version: 1.0
   base-package: com.thgy
   base-path: /**
-  exclude-path: /error, /ops/**
+#  exclude-path: /error, /ops/**
   # 鉴权配置, 保持默认配置即可
   #  authorization:
   #    name: Authorization

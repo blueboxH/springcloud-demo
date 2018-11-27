@@ -21,6 +21,10 @@ spring:
           username: huangbo
           password: huangbo
 
+          # 本地git只需要执行git init 然后commit之后就可以使用
+#          uri: file:///C:\Users\HT\Desktop\udev-config-repo
+#          search-paths: /{application}   # 注意, 少了 "/" 会出错
+
 # todo: 用户名不设置可不可以, 分支功能的使用, 生产环境配置
 
 # 暂时不设置日志
